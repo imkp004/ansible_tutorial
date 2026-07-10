@@ -1,2 +1,3 @@
-3.80.127.245 ansible_user=ec2-user
-98.84.152.152 ansible_user=ubuntu
+34.233.128.246 ansible_user=ec2-user
+54.234.69.92 ansible_user=ubuntu
+54.162.147.38 ansible_user=ubuntu
