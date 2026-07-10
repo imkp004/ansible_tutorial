@@ -1,3 +1,2 @@
-34.233.128.246 ansible_user=ec2-user
-54.234.69.92 ansible_user=ubuntu
-54.162.147.38 ansible_user=ubuntu
+98.84.104.24 ansible_user=ec2-user apache_package=httpd php_package=php
+100.53.117.36 ansible_user=ubuntu apache_package=apache2 php_package=libapache2-mod-php
