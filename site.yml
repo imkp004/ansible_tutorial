@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+    - name: install updates on ubuntu
+      apt: 
+        upgrade: dist
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: install updates on Amazon
+      dnf: 
+        update_only: yes
+        update_cache: yes
+      when: ansible_os_family == "RedHat"     
+
+- hosts: web-server
+  become: true
+  tasks:
+
+    - name: install apache2 package in ubuntu
+      apt: 
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: install httpd package in amazon linux  
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start starting on Amazon Linux
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      when: ansible_os_family == "RedHat"
