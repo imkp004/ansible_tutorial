@@ -38,3 +38,23 @@
         state: started
         enabled: true
       when: ansible_os_family == "RedHat"
+
+- hosts: db-server
+  become: true
+
+  tasks:
+    - name: Install Mariadb in amazon family
+      dnf:
+        name: mariadb105-server
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install mariadb in debian family
+      apt:
+        name: mariadb-server
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: Install samba package
+      package:
+        name: samba
+        state: present
