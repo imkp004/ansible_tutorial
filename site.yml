@@ -1,0 +1,68 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+    - name: install updates on ubuntu
+      tags: always
+      apt: 
+        upgrade: dist
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: install updates on Amazon
+      tags: always
+      dnf: 
+        update_only: yes
+        update_cache: yes
+      when: ansible_os_family == "RedHat"     
+
+- hosts: web-server
+  become: true
+  tasks:
+
+    - name: install apache2 package in ubuntu
+      tags: apache,apache2,ubuntu
+      apt: 
+        name: apache2
+        state: present
+      when: ansible_os_family == "Debian"
+    
+    - name: install httpd package in amazon linux
+      tags: apache,httpd,amazon  
+      dnf:
+        name: httpd
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start starting on Amazon Linux
+      tags: apache,httpd,amazon
+      service:
+        name: httpd
+        state: started
+        enabled: true
+      when: ansible_os_family == "RedHat"
+
+- hosts: db-server
+  become: true
+
+  tasks:
+    - name: Install Mariadb in amazon family
+      tags: mariadb,amazon
+      dnf:
+        name: mariadb105-server
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Install mariadb in debian family
+      tags: mariadb,ubuntu
+      apt:
+        name: mariadb-server
+        state: present
+      when: ansible_os_family == "Debian"
+    - name: Install samba package
+      tags: samba,amazon,ubuntu
+      package:
+        name: samba
+        state: present
