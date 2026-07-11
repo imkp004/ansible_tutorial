@@ -44,6 +44,15 @@
         enabled: true
       when: ansible_os_family == "RedHat"
 
+    - name: Copy default file to server
+      tags: apache,httpd,amazon,ubuntu
+      copy:
+        src: default.html
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: 0644
+
 - hosts: db-server
   become: true
 
