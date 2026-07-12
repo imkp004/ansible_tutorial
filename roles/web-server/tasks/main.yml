@@ -1,24 +1,17 @@
 - name: install apache2 package in ubuntu
-  tags: apache,apache2,ubuntu
-  apt:
-    name: apache2
+  tags: apache,apache2,ubuntu,httpd,amazon
+  package:
+    name: 
+      - "{{apache_package_name}}"
+      - "{{php_package_name}}"
     state: present
-  when: ansible_os_family == "Debian"
 
 - name: install httpd package in amazon linux
   tags: apache,httpd,amazon
-  dnf:
-    name: httpd
-    state: present
-  when: ansible_os_family == "RedHat"
-
-- name: Start starting on Amazon Linux
-  tags: apache,httpd,amazon
   service:
-    name: httpd
+    name: "{{apache_service}}"
     state: started
-    enabled: true
-  when: ansible_os_family == "RedHat"
+    enabled: yes
 
 - name: Copy default file to server
   tags: apache,httpd,amazon,ubuntu
