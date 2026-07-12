@@ -1,10 +1,10 @@
 [web-server]
-54.160.200.216 ansible_user=ec2-user
-52.91.96.196 ansible_user=ubuntu
+54.226.126.69 ansible_user=ec2-user
+54.147.174.99 ansible_user=ubuntu
 
 [db-server]
-3.83.233.229 ansible_user=ubuntu
-54.160.200.216 ansible_user=ec2-user
+54.209.235.189 ansible_user=ubuntu
+54.226.126.69 ansible_user=ec2-user
 
 [workstations]
-52.91.96.196 ansible_user=ubuntu
+54.147.174.99 ansible_user=ubuntu

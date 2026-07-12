@@ -1,0 +1,19 @@
+- name: Install Mariadb in amazon family
+  tags: mariadb,amazon
+  dnf:
+    name: mariadb105-server
+    state: present
+  when: ansible_os_family == "RedHat"
+
+- name: Install mariadb in debian family
+  tags: mariadb,ubuntu
+  apt:
+    name: mariadb-server
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Install samba package
+  tags: samba,amazon,ubuntu
+  package:
+    name: samba
+    state: present
